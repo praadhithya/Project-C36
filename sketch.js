@@ -20,12 +20,13 @@ function setup() {
   database = firebase.database()
   createCanvas(500, 500);
   Image4.resize(50,50);
+  Image8.resize(150,150)
   dog = createSprite(300,300,5,5)
   Image1.resize(150,150)
   dog.addImage(Image1);
   foodObj = new food();
   lastFed = "No Data";
-  Image8.resize(150,150)
+  
   Image2.resize(150,150)
   foodS = foodObj.getFoodStock();
   //console.log(foodS)
@@ -50,15 +51,20 @@ function draw() {
       lastFed = data.val(); 
   });
  
-  update("Hungry")
-  if (gameState!=  "Hungry"){
+   
+  //update("Hungry")
+  if (gameState!="Hungry"){
     feed.hide();
     addFood.hide();
     dog.remove();
+    fill("white")
+    stroke(51)
   }else{
     feed.show();
     addFood.show();
     dog.addImage(Image8);
+    fill("black")
+   stroke(51)
   }
   currenttime=hour();
   if(currenttime==(lastFed+1)){
@@ -75,8 +81,7 @@ function draw() {
     foodObj.display();
   }
    //add styles here
-   fill("black")
-   stroke(51)
+   
    
    textSize(25)
    text("Food Remaining: " + foodS,150,450)
@@ -93,7 +98,6 @@ function draw() {
     text("Last Feed : "+ lastFed + " AM",390,30)
   }
   if (foodS == 30){}
-    
     //name = input.value(); 
   drawSprites();
   }
